@@ -10,7 +10,7 @@ const runTest = async (width: number, depth: number) => {
     genCode(width, depth);
     const process = spawn("vite");
     const page = await browser.newPage();
-    await wait(500);
+    await wait(2000);
     const start = performance.now();
     await page.goto(`http://localhost:5173`);
     // await page.goto(`https://localhost:5173`);
@@ -18,7 +18,7 @@ const runTest = async (width: number, depth: number) => {
     runs.push(Math.round(performance.now() - start));
     await page.close();
     process.kill();
-    await wait(500);
+    await wait(2000);
   }
   console.log(
     `${width * depth} TS modules (${width}x${depth}) loaded in: ${
