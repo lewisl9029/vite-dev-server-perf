@@ -1,9 +1,10 @@
 import { defineConfig } from "vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
+console.log("process.env.USE_HTTPS", process.env.USE_HTTPS);
 
 export default defineConfig({
   server: {
-    // https: true,
+    https: !!process.env.USE_HTTPS,
     // warmup: {
     //   clientFiles: ['./src/**.ts']
     // }
@@ -17,7 +18,7 @@ export default defineConfig({
         return code;
       },
     },
-    // basicSsl(),
+    ...(process.env.USE_HTTPS ? [basicSsl()] : []),
   ],
 });
 

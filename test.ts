@@ -3,21 +3,24 @@ import { launch } from "puppeteer";
 import { genCode } from "./codegen.js";
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
+console.log("process.env.USE_HTTPS", process.env.USE_HTTPS);
 const runTest = async (width: number, depth: number) => {
   const runs: number[] = [];
   for (let i = 0; i < 5; i++) {
     genCode(width, depth);
-    const process = spawn("vite");
+    const vite = spawn("vite");
     const page = await browser.newPage();
     await wait(2000);
     const start = performance.now();
-    await page.goto(`http://localhost:5173`);
-    // await page.goto(`https://localhost:5173`);
+    await page.goto(
+      process.env.USE_HTTPS
+        ? `https://localhost:5173`
+        : `http://localhost:5173`,
+    );
     await page.waitForSelector("#app", { timeout: 10_000 });
     runs.push(Math.round(performance.now() - start));
     await page.close();
-    process.kill();
+    vite.kill();
     await wait(2000);
   }
   console.log(
