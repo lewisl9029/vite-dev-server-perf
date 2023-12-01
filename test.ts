@@ -13,6 +13,7 @@ const runTest = async (width: number, depth: number) => {
     await wait(500);
     const start = performance.now();
     await page.goto(`http://localhost:5173`);
+    // await page.goto(`https://localhost:5173`);
     await page.waitForSelector("#app", { timeout: 10_000 });
     runs.push(Math.round(performance.now() - start));
     await page.close();
@@ -26,7 +27,10 @@ const runTest = async (width: number, depth: number) => {
   );
 };
 
-const browser = await launch();
+const browser = await launch({
+  ignoreHTTPSErrors: true,
+  headless: "new",
+});
 
 if (process.argv.length === 4) {
   const [width, depth] = process.argv.slice(2);

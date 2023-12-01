@@ -1,11 +1,13 @@
 import { defineConfig } from "vite";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default defineConfig({
-  // server: {
-  //   warmup: {
-  //     clientFiles: ['./src/**.ts']
-  //   }
-  // },
+  server: {
+    // https: true,
+    // warmup: {
+    //   clientFiles: ['./src/**.ts']
+    // }
+  },
   plugins: [
     {
       name: "artificial-slowdown",
@@ -15,6 +17,7 @@ export default defineConfig({
         return code;
       },
     },
+    // basicSsl(),
   ],
 });
 
