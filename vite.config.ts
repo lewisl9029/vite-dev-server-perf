@@ -5,9 +5,9 @@ console.log("process.env.USE_HTTPS", process.env.USE_HTTPS);
 export default defineConfig({
   server: {
     https: !!process.env.USE_HTTPS,
-    // warmup: {
-    //   clientFiles: ['./src/**.ts']
-    // }
+    warmup: {
+      clientFiles: ["./src/**.ts"],
+    },
   },
   plugins: [
     {

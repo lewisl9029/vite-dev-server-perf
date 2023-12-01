@@ -10,7 +10,7 @@ const runTest = async (width: number, depth: number) => {
     genCode(width, depth);
     const vite = spawn("vite");
     const page = await browser.newPage();
-    await wait(2000);
+    await wait(10000);
     const start = performance.now();
     await page.goto(
       process.env.USE_HTTPS
