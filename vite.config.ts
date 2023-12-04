@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     https: !!process.env.USE_HTTPS,
     warmup: {
-      clientFiles: ["./src/**.ts"],
+      clientFiles: ["./src/**/*.ts"],
     },
   },
   plugins: [
