@@ -33,6 +33,8 @@ window.count++`,
     );
   }
 
+  const paths: string[] = [];
+
   const generate = (
     dir: string,
     ext: string,
@@ -41,8 +43,10 @@ window.count++`,
     mkdirSync(`./src/${dir}`);
     for (let i = 1; i < depth; i++) {
       write(`src/${dir}/${i}.${ext}`, `import "${nextImp(i + 1)}"`);
+      paths.push(`src/${dir}/${i}.${ext}`);
     }
     write(`src/${dir}/${depth}.${ext}`, ``);
+    paths.push(`src/${dir}/${depth}.${ext}`);
   };
 
   let rootImports = ``;
@@ -60,5 +64,15 @@ app.id = "app";
 app.textContent = window.count + ' TypeScript modules (import graph width:${width} x depth:${depth}) loaded in ' + (performance.now() - window.start).toFixed(2) + 'ms';
 document.body.appendChild(app);
 `,
+  );
+
+  writeFileSync(
+    `src/preload.js`,
+    `${paths
+      .map(
+        (path) =>
+          `document.body.appendChild(Object.assign(document.createElement('link'), { rel: "modulepreload", href: "./${path}" } ))`,
+      )
+      .join(";")}`,
   );
 }
