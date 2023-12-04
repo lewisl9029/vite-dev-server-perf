@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./node_modules/puppeteer/install.js",
-    "build": "bun codegen.ts",
+    "build": "bun build.ts",
     "dev": "vite",
     "test": "bun test.ts"
   },

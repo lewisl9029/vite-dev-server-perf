@@ -66,13 +66,14 @@ document.body.appendChild(app);
 `,
   );
 
-  writeFileSync(
-    `src/preload.js`,
-    `${paths
-      .map(
-        (path) =>
-          `document.body.appendChild(Object.assign(document.createElement('link'), { rel: "modulepreload", href: "./${path}" } ))`,
-      )
-      .join(";")}`,
-  );
+  // Moved pre-generated preload links into html instead, since this might have startup costs of its own
+  // writeFileSync(
+  //   `src/preload.js`,
+  //   `${paths
+  //     .map(
+  //       (path) =>
+  //         `document.body.appendChild(Object.assign(document.createElement('link'), { rel: "modulepreload", href: "./${path}" } ))`,
+  //     )
+  //     .join(";")}`,
+  // );
 }
