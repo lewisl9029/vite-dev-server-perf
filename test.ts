@@ -39,10 +39,10 @@ if (process.argv.length === 4) {
   const [width, depth] = process.argv.slice(2);
   await runTest(Number(width), Number(depth));
 } else {
-  await runTest(50, 20);
-  await runTest(20, 50);
-  await runTest(100, 20);
-  await runTest(250, 20);
+  // await runTest(50, 20);
+  // await runTest(20, 50);
+  // await runTest(100, 20);
+  // await runTest(250, 20);
   await runTest(400, 25);
 }
 
